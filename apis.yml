@@ -1,8 +1,32 @@
 aid: astrus
 name: Astrus
-description: Astrus is a company surfaced as a portfolio company of khosla-ventures and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Astrus is an AI-powered microchip design company automating the physical
+  layout of analog circuits. Founded in 2022 by Brad Moon (CEO) and Zeyi Wang
+  (CTO) and based in Toronto and Waterloo, Canada, Astrus applies deep
+  reinforcement learning — inspired by AlphaGo-style self-play — to generate
+  thousands of manufacturable analog chip layouts in seconds, targeting
+  high-speed SERDES interconnects used in data-center GPUs. The platform lets
+  circuit designers submit a schematic and receive optimized layouts in minutes
+  rather than the weeks of manual transistor-by-transistor placement that analog
+  EDA traditionally requires. Astrus raised $8M in seed funding led by Khosla
+  Ventures with participation from Pradeep Sindhu, 1517 Fund, Drive Capital and
+  Alumni Ventures. This profile was surfaced as a Khosla Ventures portfolio
+  company; Astrus publishes no public developer API, SDK, or documentation
+  surface at this time.
 url: https://raw.githubusercontent.com/api-evangelist/astrus/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://framerusercontent.com/assets/zV3g2D3ZQFZKjSTe4Mzzhce8G9A.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,9 +35,16 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
+- Artificial Intelligence
+- Semiconductors
+- Chip Design
+- Electronic Design Automation
+- Analog Circuits
+- Machine Learning
+- Reinforcement Learning
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -21,5 +52,18 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/astrus-domain-security.yml
 - type: Website
   url: https://www.astrus.ai/
+- type: Blog
+  url: https://medium.com/@B83MOON
+- type: TermsOfService
+  url: https://www.astrus.ai/terms
+- type: PrivacyPolicy
+  url: https://www.astrus.ai/privacy
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
