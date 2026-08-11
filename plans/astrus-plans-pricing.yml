@@ -1,0 +1,19 @@
+generated: '2026-08-10'
+method: searched
+source: https://www.astrus.ai/sitemap.xml
+plan_count: 0
+currency: null
+plans: []
+note: >-
+  Astrus publishes no pricing or plans of any kind — not a tier table, not a
+  contact-sales page. The public site is a five-page Framer marketing site whose
+  own sitemap lists only /, /careers, /404, /privacy and /terms; /pricing and
+  /plans both hard-404. There is no API, so there is no API plan surface either.
+  Press coverage (BusinessWire, September 2025) describes the company as still in
+  R&D and preparing its first paid pilots with Tier-1 semiconductor customers,
+  which is consistent with a direct-sales motion that has not yet produced a
+  published price.
+evidence:
+- {url: 'https://www.astrus.ai/pricing', status: 404}
+- {url: 'https://www.astrus.ai/plans', status: 404}
+- {url: 'https://www.astrus.ai/sitemap.xml', status: 200}

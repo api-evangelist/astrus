@@ -1,0 +1,92 @@
+generated: '2026-08-10'
+method: probed
+source: live HTTP probes of every Astrus-controlled host discovered in this pass
+note: >-
+  RECORDED ABSENCE, NOT A PRESENCE. Astrus serves no /.well-known/ document on any
+  host it controls. The marketing site (www.astrus.ai, a Framer-hosted static site)
+  returns a hard 404 for every well-known path. The product application host
+  (app.astrus.ai, a Vite SPA on S3/CloudFront) answers HTTP 200 with the same
+  800-byte HTML shell for every path including /.well-known/* — an SPA catch-all,
+  which is a MISS, not a document. No WellKnown and no SecurityTxt pointer is
+  emitted from this file.
+hosts:
+- host: https://www.astrus.ai
+  role: marketing site
+  server: Framer
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /openapi.json, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /robots.txt, status: 200, note: 'Allow: / — points at /sitemap.xml'}
+  - {path: /sitemap.xml, status: 200, note: 'five URLs total: /, /careers, /404, /privacy, /terms'}
+- host: https://app.astrus.ai
+  role: product web application (authenticated)
+  server: AmazonS3 behind CloudFront
+  robots: 'User-agent: * / Disallow: /'
+  documents:
+  - path: /robots.txt
+    status: 200
+    body: 'User-agent: *  Disallow: /'
+  - path: /.well-known/security.txt
+    status: 200
+    document: false
+    note: SPA catch-all — identical 800-byte HTML shell, not a security.txt
+  - path: /.well-known/agent-card.json
+    status: 200
+    document: false
+    note: SPA catch-all — HTML shell, rejected per the AgentCard probe rule
+  - path: /.well-known/agent.json
+    status: 200
+    document: false
+    note: SPA catch-all — HTML shell, rejected
+  - path: /.well-known/openid-configuration
+    status: 200
+    document: false
+    note: SPA catch-all — HTML shell
+  - path: /openapi.json
+    status: 200
+    document: false
+    note: SPA catch-all — HTML shell, does not parse as OpenAPI
+  crawl_posture: >-
+    robots.txt disallows all paths on this host. Root and response headers were read
+    before robots.txt was retrieved; no further crawling of this host was performed.
+x-observed-infrastructure:
+  note: >-
+    NOT an Astrus-published contract. These hosts were read out of the
+    Content-Security-Policy response header on https://app.astrus.ai/ and are
+    recorded as observation only. None of them serves a public, machine-readable
+    API contract, and none of them earns a scored pointer.
+  source: Content-Security-Policy header on https://app.astrus.ai/ (HTTP 200)
+  connect_src:
+  - host: '*.api.astrus.ai'
+    resolves: false
+    note: api.astrus.ai is NXDOMAIN — no publicly resolvable API host exists
+  - host: acg.eda.astrus.site
+    resolves: false
+    note: >-
+      astrus.site is an Astrus-controlled domain on AWS Route 53 nameservers, but
+      this record does not resolve publicly
+  - host: cognito-idp.us-east-2.amazonaws.com
+    resolves: true
+    note: AWS Cognito identity provider endpoint (AWS-operated, not Astrus-served)
+  - host: acg-eda-tool.auth.us-east-2.amazoncognito.com
+    resolves: true
+    probes:
+    - {path: /, status: 200}
+    - {path: /login, status: 302}
+    - {path: /oauth2/authorize, status: 302}
+    - {path: /.well-known/jwks.json, status: 404}
+    - {path: /.well-known/openid-configuration, status: 404}
+    note: >-
+      A live AWS Cognito hosted-UI authorization domain for the Astrus product
+      ("acg-eda-tool"). It is AWS infrastructure fronting a private product login,
+      not a documented developer authentication surface, so no Authentication or
+      OAuthScopes pointer is emitted from it. The Cognito user-pool issuer that
+      would serve OIDC discovery is not publicly named anywhere Astrus publishes.

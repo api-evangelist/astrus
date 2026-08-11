@@ -1,0 +1,17 @@
+generated: '2026-08-10'
+method: searched
+source: https://www.astrus.ai/sitemap.xml
+limit_count: 0
+rate_limits: []
+headers: []
+note: >-
+  No rate limits are documented because no public API exists to limit. Astrus
+  publishes no developer documentation, no API reference and no machine-readable
+  contract on any host it controls; the only authenticated surface is a private
+  product web application behind an AWS Cognito login. Nothing here is a finding
+  about the runtime behaviour of an Astrus API — it is a record that there is no
+  public API to observe.
+evidence:
+- {url: 'https://www.astrus.ai/docs', status: 404}
+- {url: 'https://www.astrus.ai/developers', status: 404}
+- {url: 'https://www.astrus.ai/api', status: 404}

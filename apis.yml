@@ -35,7 +35,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-10'
 tags:
 - Company
 - Artificial Intelligence
@@ -62,8 +62,45 @@ common:
   url: https://www.astrus.ai/terms
 - type: PrivacyPolicy
   url: https://www.astrus.ai/privacy
+- type: LinkedIn
+  url: https://www.linkedin.com/company/astrus-ai
+- type: Careers
+  url: https://www.astrus.ai/careers
+- type: LLMsTxt
+  url: llms/astrus-llms.txt
+- type: Plans
+  url: plans/astrus-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/astrus-rate-limits.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-10'
+  status: minimal
+  artifacts_added: 4
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Full contract-discovery pass (STEP 0b) against every Astrus-controlled host.
+    No OpenAPI, GraphQL, MCP, AsyncAPI or A2A agent card exists. Supersedes the
+    2026-07-19 backfill stamp.
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Astrus ships its analog-layout tool only as a private authenticated web app at
+    app.astrus.ai (an S3/CloudFront SPA behind an AWS Cognito login whose robots.txt
+    disallows everything); the public site is a five-page Framer marketing site whose
+    own sitemap lists only /, /careers, /404, /privacy and /terms, and which never
+    uses the word API.
+  evidence:
+  - url: https://www.astrus.ai/sitemap.xml
+    status: 200
+  - url: https://www.astrus.ai/openapi.json
+    status: 404
+  - url: https://www.astrus.ai/.well-known/agent-card.json
+    status: 404
+  - url: https://www.astrus.ai/docs
+    status: 404
+  - url: https://app.astrus.ai/robots.txt
+    status: 200
+  - url: https://acg-eda-tool.auth.us-east-2.amazoncognito.com/oauth2/authorize
+    status: 302
+  checked: '2026-08-10'
