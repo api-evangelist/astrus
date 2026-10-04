@@ -54,7 +54,7 @@ tags:
 - Chip Design
 - Electronic Design Automation
 - Analog Circuits
-- Machine-Learning
+- Machine Learning
 - Reinforcement Learning
 tags_raw:
 - Company
@@ -65,6 +65,7 @@ tags_raw:
 - Analog Circuits
 - Machine Learning
 - Reinforcement Learning
+- Machine-Learning
 apis: []
 maintainers:
 - FN: Kin Lane
